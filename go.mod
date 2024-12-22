@@ -1,3 +1,3 @@
-module github.com/hebeinanji/ProccessRun
+module github.com/hebeinanji/process-run
 
 go 1.22.3
