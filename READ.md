@@ -2,7 +2,7 @@ install
 
 go get github.com/hebeinanji/process-run@latest
 
-use
+usage
 
 newProcess := process.ProcessRun{
 ServiceList: []dataService.DataService{
