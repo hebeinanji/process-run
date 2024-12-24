@@ -117,8 +117,7 @@ func pShutdown(p *ProcessRun) error {
 }
 
 func (p *ProcessRun) dataServiceRun(s dataService.DataService) {
-	fmt.Printf("dataServiceRun start--%T", s)
-	fmt.Print()
+	fmt.Printf("dataServiceRun start--%T\n", s)
 	defer func() {
 		if runErr := recover(); runErr != nil {
 			fmt.Println(runErr)
