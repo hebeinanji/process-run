@@ -131,7 +131,13 @@ func (p *ProcessRun) dataServiceRun(s dataService.DataService) {
 		if !canRun {
 			continue
 		}
-		sName := reflect.ValueOf(s).Elem().FieldByName("Name").String()
+		var sName string
+		reflectValue := reflect.ValueOf(s)
+		if reflectValue.Kind() == reflect.Ptr {
+			sName = reflectValue.Elem().FieldByName("Name").String()
+		} else {
+			sName = reflectValue.FieldByName("Name").String()
+		}
 		p.RunningServiceList.rw.Lock()
 		p.RunningServiceList.ServiceList[sName] = s
 		p.RunningServiceList.rw.Unlock()
@@ -151,7 +157,13 @@ func (p *ProcessRun) consumerRun(c consumer.Consumer) {
 		}
 	}()
 	for p.status == RUNNING {
-		cName := reflect.ValueOf(c).Elem().FieldByName("Name").String()
+		var cName string
+		reflectValue := reflect.ValueOf(c)
+		if reflectValue.Kind() == reflect.Ptr {
+			cName = reflectValue.Elem().FieldByName("Name").String()
+		} else {
+			cName = reflectValue.FieldByName("Name").String()
+		}
 		p.RunningConsumerList.rw.Lock()
 		p.RunningConsumerList.ConsumerList[cName] = c
 		p.RunningConsumerList.rw.Unlock()
